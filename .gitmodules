@@ -1,0 +1,9 @@
+#[submodule "themes/anubis"]
+#	path = themes/anubis
+#	url = https://github.com/mitrichius/hugo-theme-anubis.git
+#[submodule "themes/beautifulhugo"]
+#	path = themes/beautifulhugo
+#	url = https://github.com/halogenica/beautifulhugo.git
+[submodule "themes/pure"]
+	path = themes/pure
+	url = https://github.com/xiaoheiAh/hugo-theme-pure
