@@ -14,26 +14,44 @@ if [ -n "$JQ" ] ; then
     chmod +x "$JQ"
 fi
 
-EXT=".tar.gz"
+echo "JQ=${JQ}"
 
-BINARY=$(curl -Ls "https://api.github.com/repos/gohugoio/hugo/releases/latest" | \
-$JQ -r '.assets[] | {name, browser_download_url} | select(.name | test("hugo_\\d+\\.\\d+\\.\\d+_Linux-64bit\\${EXT}")).browser_download_url')
+EXT=".tar.gz"
+HUGO_PACKAGE_URL=$( \
+    curl -Ls "https://api.github.com/repos/gohugoio/hugo/releases/latest" | \
+    $JQ -r '.assets[].browser_download_url' | \
+    grep -Pie "hugo_\d+\.\d+\.\d+_Linux-64bit.tar.gz" \
+)
+
+echo "Hugo package url: ${HUGO_PACKAGE_URL}"
 
 HUGO_BINARY_PACKAGE_NAME="hugo_binary"
-HUGO_BINARY_PACKAGE="${HUGO_BINARY_PACKAGE}${EXT}"
+HUGO_BINARY_PACKAGE="${HUGO_BINARY_PACKAGE_NAME}${EXT}"
 
-curl -Lso "$WORKSPACE/$HUGO_BINARY_PACKAGE" "$BINARY"
+curl -Lso "$WORKSPACE/$HUGO_BINARY_PACKAGE" "$HUGO_PACKAGE_URL"
+
+echo "Downloaded hugo binary at $WORKSPACE/$HUGO_BINARY_PACKAGE"
+
 pushd $WORKSPACE
 tar -xzf "$HUGO_BINARY_PACKAGE"
-mv "$HUGO_BINARY_PACKAGE_NAME/*" ./
-HUGO="${WORKSPACE}/hugo"
-rm -rf hugo-binary
+HUGO="$(pwd)/hugo"
+rm "$HUGO_BINARY_PACKAGE"
 popd
 
-mkdir -p ${WORKSPACE}/${CONTENT_DIR}/docs
-ln "${WORKSPACE}/${CONTENT_DIR}/content" "${WORKSPACE}/${SITE_DIR}/content"
-ln "${WORKSPACE}/${CONTENT_DIR}/docs" "${WORKSPACE}/${SITE_DIR}/docs" 
+echo "Hugo binary: $HUGO"
+
+mkdir -p "${WORKSPACE}/${CONTENT_DIR}/docs"
+mkdir -p "${WORKSPACE}/${CONTENT_DIR}/content"
+mv "${WORKSPACE}/${CONTENT_DIR}/content" "${WORKSPACE}/${SITE_DIR}/content"
+mv "${WORKSPACE}/${CONTENT_DIR}/docs" "${WORKSPACE}/${SITE_DIR}/docs" 
+
+ls -al "${WORKSPACE}/${SITE_DIR}"
+
+echo "Running hugo"
 
 pushd "$WORKSPACE/$SITE_DIR"
 $HUGO
 popd
+
+mv "${WORKSPACE}/${SITE_DIR}/content" "${WORKSPACE}/${CONTENT_DIR}/content"
+mv "${WORKSPACE}/${SITE_DIR}/docs" "${WORKSPACE}/${CONTENT_DIR}/docs"
