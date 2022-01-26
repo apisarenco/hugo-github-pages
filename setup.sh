@@ -42,16 +42,17 @@ echo "Hugo binary: $HUGO"
 
 mkdir -p "${WORKSPACE}/${CONTENT_DIR}/docs"
 mkdir -p "${WORKSPACE}/${CONTENT_DIR}/content"
-mv "${WORKSPACE}/${CONTENT_DIR}/content" "${WORKSPACE}/${SITE_DIR}/content"
+cp -r "${WORKSPACE}/${CONTENT_DIR}/content" "${WORKSPACE}/${SITE_DIR}/content"
 mv "${WORKSPACE}/${CONTENT_DIR}/docs" "${WORKSPACE}/${SITE_DIR}/docs" 
 
 ls -al "${WORKSPACE}/${SITE_DIR}"
 
-echo "Running hugo"
+echo "Running hugo in $WORKSPACE/$SITE_DIR"
 
 pushd "$WORKSPACE/$SITE_DIR"
 $HUGO
 popd
 
-mv "${WORKSPACE}/${SITE_DIR}/content" "${WORKSPACE}/${CONTENT_DIR}/content"
+echo "Moving docs"
 mv "${WORKSPACE}/${SITE_DIR}/docs" "${WORKSPACE}/${CONTENT_DIR}/docs"
+ls -al "${WORKSPACE}/${CONTENT_DIR}/docs"
