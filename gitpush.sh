@@ -9,7 +9,7 @@ git config user.name "Alexandru Pisarenco"
 git checkout -b build
 CHANGES="$(git status --porcelain)"
 echo $CHANGES
-if [ -n "$CHANGES" ] ; then
+if [ ! -n "$CHANGES" ] ; then
     git add docs
     git commit -m "Build: $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 fi
