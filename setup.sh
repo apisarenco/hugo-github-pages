@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
+set -eo pipefail
+
 WORKSPACE="$1"
 SITE_DIR="$2"
 CONTENT_DIR="$3"
+
+echo "Working on WORKSPACE=${WORKSPACE}, with SITE_DIR=${SITE_DIR} and CONTENT_DIR=${CONTENT_DIR}"
 
 JQ=$(which jq | head -n 1 2> /dev/null || :)
 if [ -n "$JQ" ] ; then
