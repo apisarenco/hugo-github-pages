@@ -8,7 +8,6 @@ pushd "${WORKSPACE}/${CONTENT_DIR}"
 git config user.email "pisarenco.a@gmail.com"
 git config user.name "Alexandru Pisarenco"
 git checkout -b build
-rm -rf docs
 CHANGES="$(git status --porcelain)"
 echo $CHANGES
 if [ ! -n "$CHANGES" ] ; then
