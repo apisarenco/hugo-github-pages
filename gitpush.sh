@@ -7,7 +7,7 @@ CONTENT_DIR="$2"
 pushd "${WORKSPACE}/${CONTENT_DIR}"
 git config user.email "pisarenco.a@gmail.com"
 git config user.name "Alexandru Pisarenco"
-git checkout -b build
+git rebase -s theirs origin/main
 CHANGES="$(git status --porcelain)"
 echo $CHANGES
 if [ ! -n "$CHANGES" ] ; then
