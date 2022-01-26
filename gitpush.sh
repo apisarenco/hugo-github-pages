@@ -2,8 +2,9 @@
 set -eo pipefail
 
 WORKSPACE="$1"
+CONTENT_DIR="$2"
 
-pushd "${WORKSPACE}/gh-content"
+pushd "${WORKSPACE}/${CONTENT_DIR}"
 git config user.email "pisarenco.a@gmail.com"
 git config user.name "Alexandru Pisarenco"
 git checkout -b build
