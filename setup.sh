@@ -40,10 +40,8 @@ popd
 
 echo "Hugo binary: $HUGO"
 
-mkdir -p "${WORKSPACE}/${CONTENT_DIR}/docs"
 mkdir -p "${WORKSPACE}/${CONTENT_DIR}/content"
 cp -r "${WORKSPACE}/${CONTENT_DIR}/content" "${WORKSPACE}/${SITE_DIR}/content"
-mv "${WORKSPACE}/${CONTENT_DIR}/docs" "${WORKSPACE}/${SITE_DIR}/docs" 
 
 ls -al "${WORKSPACE}/${SITE_DIR}"
 
