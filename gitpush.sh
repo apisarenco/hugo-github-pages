@@ -10,6 +10,10 @@ git config user.name "Alexandru Pisarenco"
 
 sed -i -s 's/^\/docs\/\*$//' .gitignore
 
+echo "---- .gitignore ----"
+cat .gitignore
+echo "---- END .gitignore ----"
+
 CHANGES="$(git status docs --porcelain)"
 
 echo "Current changes:"
