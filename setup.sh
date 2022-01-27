@@ -4,6 +4,7 @@ set -eo pipefail
 WORKSPACE="$1"
 SITE_DIR="$2"
 CONTENT_DIR="$3"
+BUILD_DIR="$4"
 
 echo "Working on WORKSPACE=${WORKSPACE}, with SITE_DIR=${SITE_DIR} and CONTENT_DIR=${CONTENT_DIR}"
 
@@ -52,6 +53,6 @@ $HUGO
 popd
 
 echo "Moving docs"
-rm -rf "${WORKSPACE}/${CONTENT_DIR}/docs"
-mv "${WORKSPACE}/${SITE_DIR}/docs" "${WORKSPACE}/${CONTENT_DIR}/docs"
-ls -al "${WORKSPACE}/${CONTENT_DIR}/docs"
+rm -rf "${WORKSPACE}/${BUILD_DIR}/docs"
+mv "${WORKSPACE}/${SITE_DIR}/docs" "${WORKSPACE}/${BUILD_DIR}/docs"
+ls -al "${WORKSPACE}/${BUILD_DIR}/docs"

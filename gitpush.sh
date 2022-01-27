@@ -2,9 +2,9 @@
 set -eo pipefail
 
 WORKSPACE="$1"
-CONTENT_DIR="$2"
+BUILD_DIR="$2"
 
-pushd "${WORKSPACE}/${CONTENT_DIR}"
+pushd "${WORKSPACE}/${BUILD_DIR}"
 git config user.email "pisarenco.a@gmail.com"
 git config user.name "Alexandru Pisarenco"
 
