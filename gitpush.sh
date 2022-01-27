@@ -7,7 +7,6 @@ CONTENT_DIR="$2"
 pushd "${WORKSPACE}/${CONTENT_DIR}"
 git config user.email "pisarenco.a@gmail.com"
 git config user.name "Alexandru Pisarenco"
-git rebase -s theirs origin/main
 
 sed -i -s 's/^\/docs\/\*$//' .gitignore
 CHANGES="$(git status --porcelain)"
