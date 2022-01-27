@@ -10,11 +10,11 @@ git config user.name "Alexandru Pisarenco"
 git rebase -s theirs origin/main
 
 sed -i -s 's/^\/docs\/\*$//' .gitignore
-
 CHANGES="$(git status --porcelain)"
+
 echo "Current changes:"
 echo $CHANGES
-if [ ! -n "$CHANGES" ] ; then
+if [ -n "$CHANGES" ] ; then
     git add docs
     git commit -m "Build: $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 fi
