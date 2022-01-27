@@ -52,5 +52,6 @@ $HUGO
 popd
 
 echo "Moving docs"
+rm -rf "${WORKSPACE}/${CONTENT_DIR}/docs"
 mv "${WORKSPACE}/${SITE_DIR}/docs" "${WORKSPACE}/${CONTENT_DIR}/docs"
 ls -al "${WORKSPACE}/${CONTENT_DIR}/docs"
