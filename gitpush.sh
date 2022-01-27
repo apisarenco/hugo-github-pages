@@ -9,7 +9,7 @@ git config user.email "pisarenco.a@gmail.com"
 git config user.name "Alexandru Pisarenco"
 
 sed -i -s 's/^\/docs\/\*$//' .gitignore
-CHANGES="$(git status --porcelain | grep -Pe '^\s*\w+\s*docs' || :)"
+CHANGES="$(git status --porcelain | grep -Pe '^\s*[\w?]+\s*docs' || :)"
 
 echo "Current changes:"
 echo $CHANGES
