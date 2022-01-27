@@ -9,11 +9,12 @@ git config user.email "pisarenco.a@gmail.com"
 git config user.name "Alexandru Pisarenco"
 
 sed -i -s 's/^\/docs\/\*$//' .gitignore
-CHANGES="$(git status --porcelain | grep -Pe '^\s*[\w?]+\s*docs' || :)"
+
+CHANGES="$(git status docs --porcelain)"
 
 echo "Current changes:"
 echo $CHANGES
-if [ -n "$CHANGES" ] ; then
+if [ "$CHANGES" ] ; then
     git add docs
     git commit -m "Build: $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 fi
